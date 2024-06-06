@@ -13,6 +13,8 @@ from amazon_transcribe.model import TranscriptEvent
 import tkinter as tk
 import threading
 
+import json
+
 # Event handler for processing transcription results
 
 #Global variables
@@ -22,6 +24,15 @@ client = OpenAI(
     api_key=os.environ.get("OPENAI_API_KEY") # API key
 )
 
+def export_json(data, filename):
+    with open(filename, 'a') as f:
+        json.dump(data, f, default=result_to_dict)
+
+def result_to_dict(result):
+    # Convert the Result object to a dictionary
+    return result.__dict__
+
+
 class MyEventHandler(TranscriptResultStreamHandler):
     def __init__(self, transcript_result_stream, output_widget, file_path):
         super().__init__(transcript_result_stream)
@@ -30,14 +41,25 @@ class MyEventHandler(TranscriptResultStreamHandler):
 
     async def handle_transcript_event(self, transcript_event: TranscriptEvent):
         results = transcript_event.transcript.results
+        export_json(results, 'results.json')
         for result in results:
             for alt in result.alternatives:
                 transcription = alt.transcript + "\n"
-                if not result.is_partial: # If the transcription is not partial, write to file
-                    self.output_widget.insert(tk.END, transcription)
+                speaker = None
+                for item in alt.items:
+                    if item.confidence is not None and item.speaker is not None:
+                        speaker = item.speaker
+                        print(speaker)
+                if not result.is_partial and speaker is not None: # If the transcription is not partial, write to file
+                    if speaker == "0":
+                        speaker = "Doctor"
+                    else:
+                        speaker = "Client"
+                    self.output_widget.insert(tk.END, (speaker + ": " + transcription + "\n"))
                     self.output_widget.see(tk.END)
                     with open(self.file_path, "a") as f:
-                        f.write(transcription)
+                        f.write(speaker + ": " + transcription)
+
                 await asyncio.sleep(0)  # Change variable to change wait time.
 
 
@@ -50,7 +72,7 @@ async def basic_transcribe(region: str, output_widget, stop_event):
         media_sample_rate_hz=16000,
         media_encoding="pcm",
         enable_partial_results_stabilization= 'True', # Enable partial results stabilization
-        partial_results_stability= 'high', # [high, low, medium] - high is recommended for most use cases
+        partial_results_stability= 'medium', # [high, low, medium] - high is recommended for most use cases
         show_speaker_label= 'True', # Enable speaker identification
     )
 
@@ -126,7 +148,7 @@ def on_button_click():
         file_content = read_file(file_path)
         # prompt = "What is the patient's medical history?"
         response = get_chatgpt_response(prompt, file_content)
-        chat_text.insert(tk.END, "\nUser Prompt: " + prompt + "\nChatGPT Response: " + response + "\n----------------------------")
+        chat_text.insert(tk.END, "\nUser Prompt: " + prompt + "\n" + "\nChatGPT Response: " + response + "\n" + "\n----------------------------")
         chat_text.see(tk.END)
 
 # Create the main window
