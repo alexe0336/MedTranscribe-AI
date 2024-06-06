@@ -168,28 +168,3 @@ root.mainloop()
 
 
 # --------------------------------------- WORKING CODE ABOVE THIS LINE ---------------------------------------
-# Function to handle button click
-# def on_button_click():
-#     if button.config('text')[-1] == 'Start':
-#         button.config(text='Stop')
-#         # Start transcription in a separate thread to not block the Tkinter event loop
-#         threading.Thread(target=start_transcription, args=(output_text,), daemon=True).start()
-#         print("Process Started")
-#     else:
-#         button.config(text='Start')
-#         stop_transcription()
-#         print("Process Stopped")
-
-# def main():
-#     file_path = 'transcription.txt'  # Replace with your file path
-#     file_content = read_file(file_path)
-    
-#     prompt = "What is the patient's medical history?"
-    
-#     response = get_chatgpt_response(prompt, file_content)
-#     print("User Prompt: " + prompt + "\nChatGPT Response: ", response)
-#     chat_text.insert(tk.END, "User Prompt: " + prompt + "\nChatGPT Response: " + response + "\n")
-#     chat_text.see(tk.END)
-
-# if __name__ == "__main__":
-#     main()
