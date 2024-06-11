@@ -72,7 +72,7 @@ async def basic_transcribe(region: str, output_widget, stop_event):
         media_sample_rate_hz=16000,
         media_encoding="pcm",
         enable_partial_results_stabilization= 'True', # Enable partial results stabilization
-        partial_results_stability= 'medium', # [high, low, medium] - high is recommended for most use cases
+        partial_results_stability= 'high', # [high, low, medium] - high is recommended for most use cases
         show_speaker_label= 'True', # Enable speaker identification
     )
 
