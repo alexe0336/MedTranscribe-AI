@@ -29,7 +29,9 @@ Before you begin, ensure you have met the following requirements:
 2. Install the required dependencies:
 
     Inside of the directory you want type this command to download required dependencies:
+        ```markdown
         pip install -r requirements.txt
+        ```
 
 3. Create a `.env` file in the project root and add your OpenAI API key:
 
@@ -62,7 +64,9 @@ Before you begin, ensure you have met the following requirements:
     While inside of the directory folder where you saved the github repo.
     **Remember the API's you are using cost money, meaning when you are transcribing and when you ASK AI that costs money.**
     Enter this command to run the program :
+        ```markdown
         python program.py
+        ```
 
 2. In the GUI:
 - Click "Start Transcription" to begin transcribing audio.
