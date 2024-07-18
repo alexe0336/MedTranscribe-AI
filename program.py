@@ -96,7 +96,7 @@ async def basic_transcribe(region: str, output_widget, stop_event):
             stream_in.close()
             p.terminate()
 
-    handler = MyEventHandler(stream.output_stream, output_widget, "transcription.txt")
+    handler = MyEventHandler(stream.output_stream, output_widget, "transcription.txt") # Creates a new transcription.txt if one is not present
     await asyncio.gather(write_chunks(), handler.handle_events())
 
 # Function to start transcription
@@ -124,7 +124,7 @@ def get_chatgpt_response(prompt, file_content):
     
     chat_completion = client.chat.completions.create(
         messages=[
-            {"role": "system", "content": "You listen in real time to doctor client conversations and give relevant information about the conversation for the doctor to read. You are a doctors assistant."},
+            {"role": "system", "content": "You listen in real time to doctor client conversations and give relevant information about the conversation for the doctor to read. You are a doctors assistant. The information you are given will be prefaced with Doctor: and Client: indicating the different person speaking. Please take note of who says what as well as reply in short concise answers."},
             {"role": "user", "content": prompt},
             {"role": "user", "content": file_content}
         ],
@@ -144,16 +144,21 @@ def on_button_click():
         button.config(text='Start Transcription')
         stop_transcription()
         print("Process Stopped")
-        file_path = 'transcription.txt'  # Replace with your file path
-        file_content = read_file(file_path)
-        # prompt = "What is the patient's medical history?"
-        response = get_chatgpt_response(prompt, file_content)
-        chat_text.insert(tk.END, "\nUser Prompt: " + prompt + "\n" + "\nChatGPT Response: " + response + "\n" + "\n----------------------------")
-        chat_text.see(tk.END)
+
+def ask_ai():
+    file_path = 'transcription.txt'  # Replace with your file path
+    file_content = read_file(file_path)
+    # Get the ChatGPT response
+    response = get_chatgpt_response(prompt, file_content)
+    # Display the response in the chat text box
+    chat_text.insert(tk.END, "\nUser Prompt: " + prompt + "\n" + "\nAI Response: " + response + "\n" + "\n----------------------------")
+    # Scroll to the end of the chat text box
+    chat_text.see(tk.END)
+
 
 # Create the main window
 root = tk.Tk()
-root.title("Medical Transcription and AI Chat")
+root.title("MedTranscribe AI")
 
 # Function to update the prompt variable
 def update_prompt():
@@ -178,12 +183,16 @@ prompt_textbox = tk.Text(root, wrap=tk.WORD, width=80, height=4)
 prompt_textbox.grid(row=3, column=0, columnspan=2, padx=5, pady=5)
 
 # Create the button to update the prompt
-update_button = tk.Button(root, text="Update", command=update_prompt, width=15, height=2)
-update_button.grid(row=4, column=0, pady=20)
+update_button = tk.Button(root, text="Update Prompt", command=update_prompt, width=15, height=2)
+update_button.grid(row=4, column=0, columnspan=2, pady=20)
 
-# Create the button
+# Create the Start/Stop Transcription button
 button = tk.Button(root, text="Start Transcription", command=on_button_click, width=15, height=2)
-button.grid(row=4, column=0, columnspan=2, pady=20)
+button.grid(row=4, column=0, pady=20)
+
+# Create the Ask AI button
+ask_ai_button = tk.Button(root, text="Ask AI", command=ask_ai, width=15, height=2)
+ask_ai_button.grid(row=4, column=1, pady=20)
 
 # Run the Tkinter event loop
 root.mainloop()
