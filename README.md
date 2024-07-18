@@ -82,6 +82,7 @@ Before you begin, ensure you have met the following requirements:
 
 ## File Structure
 File structure should look like this after running once:
+![image](https://github.com/user-attachments/assets/88f1a5ad-fc7c-4d83-ab41-1774f0326751)
 
 
 ## Contributing
