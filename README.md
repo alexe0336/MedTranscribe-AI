@@ -20,10 +20,18 @@ Before you begin, ensure you have met the following requirements:
 ## Installation
 
 1. Clone the repository and save to a directory of your choosing:
+
+    ```markdown
+    ```python
     git clone https://github.com/alexe0336/MedTranscribe-AI.git
     cd MedTranscribeAI
+    ```
+    ```
 
 2. Install the required dependencies:
+
+    Inside of the directory you want type this command to download required dependencies:
+        pip install -r requirements.txt
 
 3. Create a `.env` file in the project root and add your OpenAI API key:
 
