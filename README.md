@@ -23,6 +23,8 @@ Before you begin, ensure you have met the following requirements:
 
     ```markdown
     git clone https://github.com/alexe0336/MedTranscribe-AI.git
+    ```
+    ```markdown
     cd MedTranscribeAI
     ```
 
