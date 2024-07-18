@@ -31,17 +31,18 @@ Before you begin, ensure you have met the following requirements:
 2. Install the required dependencies:
 
     Inside of the directory you want type this command to download required dependencies:
-        ```markdown
-        pip install -r requirements.txt
-        ```
 
-3. Create a `.env` file in the project root and add your OpenAI API key:
+   ```markdown
+   pip install -r requirements.txt
+   ```
+
+4. Create a `.env` file in the project root and add your OpenAI API key:
 
     Example .env file (Replace with your own OpenAI API Key):
 
         OPENAI_API_KEY=sadfsadg234324sdfdf234234235sdfsdsg32453245
     
-4. Configure your AWS credentials. You can do this by setting up the AWS CLI or by creating a `~/.aws/credentials` file.
+5. Configure your AWS credentials. You can do this by setting up the AWS CLI or by creating a `~/.aws/credentials` file.
     
     Example setup using .aws folder (Create config and credentials files inside of your .aws folder and fill them with the below information): 
 
