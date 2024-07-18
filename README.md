@@ -67,9 +67,9 @@ Before you begin, ensure you have met the following requirements:
     While inside of the directory folder where you saved the github repo.
     **Remember the API's you are using cost money, meaning when you are transcribing and when you ASK AI that costs money.**
     Enter this command to run the program :
-        ```markdown
-        python program.py
-        ```
+   ```markdown
+   python program.py
+   ```
 
 2. In the GUI:
 - Click "Start Transcription" to begin transcribing audio.
