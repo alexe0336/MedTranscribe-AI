@@ -80,6 +80,10 @@ Before you begin, ensure you have met the following requirements:
 
 3. The transcription will be saved in `transcription.txt`, and you can view the AI responses in the GUI.
 
+## File Structure
+File structure should look like this after running once:
+
+
 ## Contributing
 
 Contributions to MedTranscribe AI are welcome. Please feel free to submit a Pull Request.
