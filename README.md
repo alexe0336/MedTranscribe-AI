@@ -33,7 +33,7 @@ Before you begin, ensure you have met the following requirements:
     Inside of the directory you want type this command to download required dependencies:
 
    ```markdown
-   pip install -r requirements.txt
+   pip install -r MedTranscribe-AI/requirements.txt
    ```
 
 4. Create a `.env` file in the project root and add your OpenAI API key:
