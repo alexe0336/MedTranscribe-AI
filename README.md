@@ -22,10 +22,8 @@ Before you begin, ensure you have met the following requirements:
 1. Clone the repository and save to a directory of your choosing:
 
     ```markdown
-    ```python
     git clone https://github.com/alexe0336/MedTranscribe-AI.git
     cd MedTranscribeAI
-    ```
     ```
 
 2. Install the required dependencies:
